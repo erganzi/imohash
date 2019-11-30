@@ -6,25 +6,24 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"os"
 
 	"github.com/erganzi/imohash"
 )
 
 func main() {
+	FilenamePtr := flag.String("filename", "foo.txt", "Filename")
+	SampleSizePtr := flag.Int("samplesize", 16384, "SampleSize,Unit:bytes")
+	SampleThresholdPtr := flag.Int("samplethreshold", 131072, "SampleThreshold,Unit:bytes")
 	flag.Parse()
-	files := flag.Args()
 
-	if len(files) == 0 {
-		fmt.Println("imosum filenames")
-		os.Exit(0)
-	}
+	//fmt.Println("filename:", *FilenamePtr)
+	//fmt.Println("samplesize:", *SampleSizePtr)
+	//fmt.Println("samplethreshold:", *SampleThresholdPtr)
 
-	for _, file := range files {
-		hash, err := imohash.SumFile(file)
-		if err != nil {
-			log.Fatal(err)
-		}
-		fmt.Printf("%016x  %s\n", hash, file)
+	hash, err := imohash.SumFile2(*FilenamePtr, *SampleSizePtr, *SampleThresholdPtr)
+	if err != nil {
+		log.Fatal(err)
 	}
+	fmt.Printf("%016x\n", hash)
+
 }
