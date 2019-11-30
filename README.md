@@ -10,7 +10,7 @@ imohash is also available as [a Python library](https://github.com/kalafut/py-im
 
 ## Installation
 
-`go get github.com/kalafut/imohash/...`
+`go get github.com/erganzi/imohash/...`
 
 The API is described in the [package documentation](https://godoc.org/github.com/kalafut/imohash).
 
