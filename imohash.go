@@ -16,8 +16,8 @@ import (
 const Size = 16
 
 // Files smaller than this will be hashed in their entirety.
-const SampleThreshold = 128 * 1024
-const SampleSize = 16 * 1024
+const SampleThreshold = 10 * 1024 * 1024 * 1024
+const SampleSize = 16 * 1024 * 1024
 
 var emptyArray = [Size]byte{}
 
@@ -32,6 +32,12 @@ type ImoHash struct {
 // and sample threshhold values.
 func New() ImoHash {
 	return NewCustom(SampleSize, SampleThreshold)
+}
+
+// New2 returns a new ImoHash using the custom sample size
+// and sample threshhold values.
+func New2(sampleSize, sampleThreshold int) ImoHash {
+	return NewCustom(sampleSize, sampleThreshold)
 }
 
 // NewCustom returns a new ImoHash using the provided sample size
@@ -50,6 +56,12 @@ func NewCustom(sampleSize, sampleThreshold int) ImoHash {
 // SumFile hashes a file using default sample parameters.
 func SumFile(filename string) ([Size]byte, error) {
 	imo := New()
+	return imo.SumFile(filename)
+}
+
+// SumFile2 hashes a file using custom sample parameters.
+func SumFile2(filename string, samplesize, samplethreshold int) ([Size]byte, error) {
+	imo := New2(samplesize, samplethreshold)
 	return imo.SumFile(filename)
 }
 
