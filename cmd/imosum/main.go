@@ -8,7 +8,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/kalafut/imohash"
+	"github.com/erganzi/imohash"
 )
 
 func main() {
